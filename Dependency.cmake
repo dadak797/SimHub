@@ -30,7 +30,7 @@ if(EMSCRIPTEN)
     message(STATUS "Emscripten used")
     set_target_properties(${PROJECT_NAME} 
         PROPERTIES SUFFIX ".html"
-        LINK_FLAGS "-O3 -s USE_WEBGL2=1 -s FULL_ES3=1 -s USE_GLFW=3 -s USE_ZLIB=1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=1 --shell-file ${CMAKE_SOURCE_DIR}/shell_minimal.html --preload-file ${CMAKE_SOURCE_DIR}@/"
+        LINK_FLAGS "-O3 -s USE_WEBGL2=1 -s FULL_ES3=1 -s USE_FREETYPE=1 -s USE_GLFW=3 -s USE_ZLIB=1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=1 --shell-file ${CMAKE_SOURCE_DIR}/shell_minimal.html --preload-file ${CMAKE_SOURCE_DIR}@/"
     )
 else()
     message(STATUS "Emscripten not used")
@@ -85,3 +85,33 @@ add_dependencies(imgui ${DEP_LIST})
 set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/ImGui-${IMGUI_VERSION})
 set(DEP_LIST ${DEP_LIST} imgui)
 set(DEP_LIBS ${DEP_LIBS} imgui)
+
+# OCCT
+if(EMSCRIPTEN)
+    set(OCCT_VERSION "wasm-7.6.0")
+    set(OpenCASCADE_LIBS 
+        TKBin TKBinL TKBinTObj TKBinXCAF TKBO TKBool TKBRep TKCAF TKCDF TKernel
+        TKFeat TKFillet TKG2d TKG3d TKGeomAlgo TKGeomBase TKHLR TKIGES TKLCAF TKMath
+        TKMesh TKMeshVS TKOffset TKOpenGles TKPrim TKRWMesh TKService TKShHealing TKStd TKStdL
+        TKSTEP TKSTEP209 TKSTEPAttr TKSTEPBase TKSTL TKTObj TKTopAlgo TKV3d TKVCAF TKVRML
+        TKXCAF TKXDEIGES TKXDESTEP TKXMesh TKXml TKXmlL TKXmlTObj TKXmlXCAF TKXSBase
+    )
+else()
+    set(OCCT_VERSION "win-7.6.0")
+    set(OpenCASCADE_LIBS
+        TKBin TKBinL TKBinTObj TKBinXCAF TKBO TKBool TKBRep TKCAF TKCDF TKD3DHost 
+        TKD3DHostTest TKDCAF TKDFBrowser TKDraw TKernel TKFeat TKFillet TKG2d TKG3d TKGeomAlgo
+        TKGeomBase TKHLR TKIGES TKIVtk TKIVtkDraw TKLCAF TKMath TKMesh TKMeshVS TKMessageModel
+        TKMessageView TKOffset TKOpenGl TKOpenGles TKOpenGlesTest TKOpenGlTest TKPrim TKQADraw TKRWMesh TKService 
+        TKShapeView TKShHealing TKStd TKStdL TKSTEP TKSTEP209 TKSTEPAttr TKSTEPBase TKSTL TKTInspector
+        TKTInspectorAPI TKTObj TKTObjDRAW TKToolsDraw TKTopAlgo TKTopTest TKTreeModel TKV3d TKVCAF TKView 
+        TKViewerTest TKVInspector TKVRML TKXCAF TKXDEDRAW TKXDEIGES TKXDESTEP TKXMesh TKXml TKXmlL 
+        TKXmlTObj TKXmlXCAF TKXSBase TKXSDRAW
+    )
+endif()
+set(OpenCASCADE_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dependencies/OCCT-${OCCT_VERSION}/inc)
+set(OpenCASCADE_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/OCCT-${OCCT_VERSION}/lib)
+
+set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${OpenCASCADE_INCLUDE_DIR})
+set(DEP_LIB_DIR ${DEP_LIB_DIR} ${OpenCASCADE_LIBRARY_DIR})
+set(DEP_LIBS ${DEP_LIBS} ${OpenCASCADE_LIBS})

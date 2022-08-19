@@ -11,6 +11,8 @@ project(${PROJECT_NAME})
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/common.cpp         src/common.hpp
+    src/GlfwOcctView.cpp   src/GlfwOcctView.hpp
+    src/GlfwOcctWindow.cpp src/GlfwOcctWindow.hpp
 )
 
 include(Dependency.cmake)
