@@ -115,3 +115,60 @@ set(OpenCASCADE_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/OCCT-${OCCT_VERSION
 set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${OpenCASCADE_INCLUDE_DIR})
 set(DEP_LIB_DIR ${DEP_LIB_DIR} ${OpenCASCADE_LIBRARY_DIR})
 set(DEP_LIBS ${DEP_LIBS} ${OpenCASCADE_LIBS})
+
+if(NOT DEFINED EMSCRIPTEN)
+    # OpenVR
+    set(OpenVR_VERSION "1.14.15")
+    set(OpenVR_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dependencies/OpenVR-win-${OpenVR_VERSION}/inc)
+    set(OpenVR_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/OpenVR-win-${OpenVR_VERSION}/lib)
+    set(OpenVR_LIBS
+        openvr_api
+    )
+    set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${OpenVR_INCLUDE_DIR})
+    set(DEP_LIB_DIR ${DEP_LIB_DIR} ${OpenVR_LIBRARY_DIR})
+    set(DEP_LIBS ${DEP_LIBS} ${OpenVR_LIBS})
+
+    # FreeImage
+    set(FreeImage_VERSION "3.17.0")
+    set(FreeImage_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dependencies/FreeImage-win-${FreeImage_VERSION}/inc)
+    set(FreeImage_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/FreeImage-win-${FreeImage_VERSION}/lib)
+    set(FreeImage_LIBS
+        FreeImage FreeImagePlus
+    )
+    set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${FreeImage_INCLUDE_DIR})
+    set(DEP_LIB_DIR ${DEP_LIB_DIR} ${FreeImage_LIBRARY_DIR})
+    set(DEP_LIBS ${DEP_LIBS} ${FreeImage_LIBS})
+
+    # FreeType
+    set(FreeType_VERSION "2.5.5")
+    set(FreeType_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dependencies/FreeType-win-${FreeType_VERSION}/inc)
+    set(FreeType_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/FreeType-win-${FreeType_VERSION}/lib)
+    set(FreeType_LIBS
+        freetype
+    )
+    set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${FreeType_INCLUDE_DIR})
+    set(DEP_LIB_DIR ${DEP_LIB_DIR} ${FreeType_LIBRARY_DIR})
+    set(DEP_LIBS ${DEP_LIBS} ${FreeType_LIBS})
+
+    # ffmpeg
+    set(ffmpeg_VERSION "3.3.4")
+    set(ffmpeg_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dependencies/ffmpeg-win-${ffmpeg_VERSION}/inc)
+    set(ffmpeg_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/ffmpeg-win-${ffmpeg_VERSION}/lib)
+    set(ffmpeg_LIBS
+        avcodec avdevice avfilter avformat avutil swscale
+    )
+    set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${ffmpeg_INCLUDE_DIR})
+    set(DEP_LIB_DIR ${DEP_LIB_DIR} ${ffmpeg_LIBRARY_DIR})
+    set(DEP_LIBS ${DEP_LIBS} ${ffmpeg_LIBS})
+
+    # tbb
+    set(tbb_VERSION "2017.0.100")
+    set(tbb_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dependencies/tbb-win-${tbb_VERSION}/inc/tbb)
+    set(tbb_LIBRARY_DIR ${CMAKE_SOURCE_DIR}/dependencies/tbb-win-${tbb_VERSION}/lib/intel64/vc_mt)
+    set(tbb_LIBS
+        tbb tbb_debug tbb_preview tbb_preview_debug tbbmalloc tbbmalloc_debug tbbmalloc_proxy tbbmalloc_proxy_debug tbbproxy tbbproxy_debug
+    )
+    set(DEP_INCLUDE_DIR ${DEP_INCLUDE_DIR} ${tbb_INCLUDE_DIR})
+    set(DEP_LIB_DIR ${DEP_LIB_DIR} ${tbb_LIBRARY_DIR})
+    set(DEP_LIBS ${DEP_LIBS} ${tbb_LIBS})
+endif()
