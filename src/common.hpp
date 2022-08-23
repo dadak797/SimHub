@@ -3,11 +3,21 @@
 
 
 #include <iostream>
+
 #ifdef __EMSCRIPTEN__
     #include <emscripten/emscripten.h>
     #define GLFW_INCLUDE_ES3
     #define GLFW_INCLUDE_GLEXT
+#else  // __EMSCRIPTEN__
+    #include <glad/glad.h>
+#endif  // __EMSCRIPTEN__
+
+#include <GLFW/glfw3.h>
+
+#ifndef __EMSCRIPTEN__
+    #include <GLFW/glfw3native.h>
 #endif
+
 #include <spdlog/spdlog.h>
 
 
