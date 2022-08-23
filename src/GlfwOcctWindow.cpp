@@ -11,6 +11,8 @@
 #endif
 
 
+IMPLEMENT_STANDARD_RTTIEXT(GlfwOcctWindow, Aspect_Window)
+
 GlfwOcctWindow::GlfwOcctWindow(const char* title, bool toScaleBacking)
     : m_Title(title), m_Size(WINDOW_WIDTH, WINDOW_HEIGHT), m_DevicePixelRatio(1.0), m_ToScaleBacking(toScaleBacking), m_IsMapped(true)
 {
@@ -103,7 +105,7 @@ Aspect_TypeOfResize GlfwOcctWindow::DoResize()
 #else
     if (glfwGetWindowAttrib(m_Window, GLFW_VISIBLE) == 1)
     {
-        glfwGetWindowSize(myGlfwWindow, &m_Size.x(), &m_Size.y());
+        glfwGetWindowSize(m_Window, &m_Size.x(), &m_Size.y());
     }
 #endif
 
