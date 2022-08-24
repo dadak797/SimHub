@@ -32,7 +32,7 @@ public:
 
 public:
     // Constructor (Title: window id for win32, canvas id for emscripten)
-    GlfwOcctWindow(const char* title, bool toScaleBacking = true);
+    GlfwOcctWindow(const char* title, int width, int height, bool toScaleBacking = true);
 
     // Destructor
     virtual ~GlfwOcctWindow();

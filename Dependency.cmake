@@ -30,7 +30,7 @@ if(EMSCRIPTEN)
     message(STATUS "Emscripten used")
     set_target_properties(${PROJECT_NAME} 
         PROPERTIES SUFFIX ".html"
-        LINK_FLAGS "-O3 -s USE_WEBGL2=1 -s FULL_ES3=1 -s USE_FREETYPE=1 -s USE_GLFW=3 -s USE_ZLIB=1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=1 --shell-file ${CMAKE_SOURCE_DIR}/shell_minimal.html --preload-file ${CMAKE_SOURCE_DIR}@/"
+        LINK_FLAGS "-O3 -sUSE_WEBGL2=1 -sFULL_ES3=1 -sUSE_FREETYPE=1 -sUSE_GLFW=3 -s USE_ZLIB=1 -sWASM=1 -sALLOW_MEMORY_GROWTH=1 -sNO_EXIT_RUNTIME=1 -sLLD_REPORT_UNDEFINED=1 --shell-file ${CMAKE_SOURCE_DIR}/shell_minimal.html --preload-file ${CMAKE_SOURCE_DIR}@/"
     )
 else()
     message(STATUS "Emscripten not used")

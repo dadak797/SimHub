@@ -13,8 +13,8 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(GlfwOcctWindow, Aspect_Window)
 
-GlfwOcctWindow::GlfwOcctWindow(const char* title, bool toScaleBacking)
-    : m_Title(title), m_Size(WINDOW_WIDTH, WINDOW_HEIGHT), m_DevicePixelRatio(1.0), m_ToScaleBacking(toScaleBacking), m_IsMapped(true)
+GlfwOcctWindow::GlfwOcctWindow(const char* title, int width, int height, bool toScaleBacking)
+    : m_Title(title), m_Size(width, height), m_DevicePixelRatio(1.0), m_ToScaleBacking(toScaleBacking), m_IsMapped(true)
 {
 #ifdef __EMSCRIPTEN__
     m_DevicePixelRatio = emscripten_get_device_pixel_ratio();

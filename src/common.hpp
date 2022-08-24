@@ -29,5 +29,4 @@
     using klassName ## Ptr = std::shared_ptr<klassName>; \
     using klassName ## WPtr = std::weak_ptr<klassName>;
 
-
 #endif // __COMMON_H__

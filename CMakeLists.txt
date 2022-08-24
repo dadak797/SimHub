@@ -3,7 +3,11 @@ cmake_minimum_required(VERSION 3.14)
 set(PROJECT_NAME SimHub)
 set(CMAKE_CXX_STANDARD 11)
 
-set(WINDOW_NAME "SimHub")
+if(EMSCRIPTEN)
+    set(CANVAS_ID "canvas")
+else()
+    set(WINDOW_NAME "SimHub")
+endif()
 set(WINDOW_WIDTH 960)
 set(WINDOW_HEIGHT 540)
 
@@ -22,11 +26,19 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${DEP_INCLUDE_DIR})
 target_link_directories(${PROJECT_NAME} PUBLIC ${DEP_LIB_DIR})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${DEP_LIBS})
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC
-    WINDOW_NAME="${WINDOW_NAME}"
-    WINDOW_WIDTH=${WINDOW_WIDTH}
-    WINDOW_HEIGHT=${WINDOW_HEIGHT}
-)
+if(EMSCRIPTEN)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC
+        CANVAS_ID="${CANVAS_ID}"
+        WINDOW_WIDTH=${WINDOW_WIDTH}
+        WINDOW_HEIGHT=${WINDOW_HEIGHT}
+    )
+else()
+    target_compile_definitions(${PROJECT_NAME} PUBLIC
+        WINDOW_NAME="${WINDOW_NAME}"
+        WINDOW_WIDTH=${WINDOW_WIDTH}
+        WINDOW_HEIGHT=${WINDOW_HEIGHT}
+    )
+endif()
 
 # Dependency 들이 먼저 build 될 수 있게 관계 설정
 add_dependencies(${PROJECT_NAME} ${DEP_LIST})
