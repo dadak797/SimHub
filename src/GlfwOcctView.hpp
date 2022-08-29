@@ -13,6 +13,7 @@
 #endif
 
 class GlfwOcctWindow;
+class OpenGl_Context;
 
 
 class GlfwOcctView : protected AIS_ViewController
@@ -34,6 +35,18 @@ private:
 
     // Create 3D Viewer
     bool initViewer();
+
+    // Application Main Loop
+    void mainloop();
+
+    // Initialize Demo Scene
+    void initDemoScene();
+
+    // Draw Frame
+    void drawFrame();
+
+    // Clean Up
+    void cleanup();
 
 //   //! Handle view redraw.
 //   virtual void handleViewRedraw (const Handle(AIS_InteractiveContext)& theCtx,
@@ -84,6 +97,7 @@ private:
     Handle(GlfwOcctWindow) m_Window;
     Handle(V3d_View) m_View;
     Handle(AIS_InteractiveContext) m_Context;
+    Handle(OpenGl_Context) m_GLContext;
     //Graphic3d_Vec2i m_WinSizeOld;
     //double m_DevicePixelRatio;
     //unsigned int myUpdateRequests;

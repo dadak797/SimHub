@@ -49,6 +49,7 @@ GlfwOcctWindow::~GlfwOcctWindow()
     if (m_Window) 
     {
         glfwDestroyWindow(m_Window);
+        glfwTerminate();
         m_Window = nullptr;
     }
 }
