@@ -15,7 +15,7 @@
 class GlfwOcctWindow;
 
 
-class GlfwOcctView /*: protected AIS_ViewController*/
+class GlfwOcctView : protected AIS_ViewController
 {
 public:
     static GlfwOcctView& Instance();
